@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "Joshapp": {
+            "applicationId": "idhQyKbKtbEjLeVwbBXiblxig5aPrLcxjVq5Z4mV", 
+            "masterKey": "W7iyb6Bno7EPO41Zr845JgUlFwR5755LNLzpeROK"
+        }, 
+        "_default": {
+            "link": "Joshapp"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.18"
+    }
+}
