@@ -11,39 +11,21 @@ $(document).ready(function(){
 	function createArr(x) {
 		var arr = [];
 			for (var i=0; i<x; i++) {
-						arr.push(i);
-			} 
-		
+				arr.push(i);
+			} 		
 		return arr;
 	}
 		
 	function saveMsg() {
-		var arr = createArr(10);
-		
-		var promise = Parse.Cloud.run('ingestList', {datalist:arr}, {
-	
+		var arr = createArr(10);		
+		var promise = Parse.Cloud.run('saveList', {list:arr}, {
 			success: function(msg) {
 				console.log("save msg sucess: " + msg);
-		//		save(msg+ ":" + index);
 	     	},   
 			error: function(error) {
 				console.log("writeMsg error " + JSON.stringify(error));
 			}
 		});
-		
-		
-		// console.log("arr length: " + arr.length);
-		// $.each(arr, function(index){
-		// 	var promise = Parse.Cloud.run('getMsg', {}, {
-		// 		success: function(msg) {
-		// 			save(msg+ ":" + index);
-		//      	},
-		// 		error: function(error) {
-		// 			console.log("writeMsg error " + JSON.stringify(error));
-		// 		}
-		// 	})
-		// 	saves.push(promise);
-		// });
 		return promise;	
 	}	
 	
@@ -63,9 +45,6 @@ $(document).ready(function(){
 		
 	}
 	
-	
-	
-	
 
 	// Initialize Parse with your Parse application javascript keys
 	 Parse.initialize("idhQyKbKtbEjLeVwbBXiblxig5aPrLcxjVq5Z4mV",
@@ -73,9 +52,6 @@ $(document).ready(function(){
 
 	$content.empty();
 	$messages.empty();
-	
-	//var newsaves = saveMsg();
-// console.log("saves length: " + newsaves.length);
 		
 	Parse.Promise.when(saveMsg()).done(function() {
 	    displayMsg();
