@@ -7,10 +7,10 @@ $(document).ready(function(){
 	var eyeColor = ['blue', 'brown', 'hazel', 'light brown'];
 	
 	function Person(id,firstName,lastName,eyeColor) {
-      this.id = id;	 
-	  this.firstName = firstName;
-	  this.lastName = lastName;
-	  this.eyeColor = eyeColor;
+    	this.id = id;	 
+	  	this.firstName = firstName;
+	  	this.lastName = lastName;
+	  	this.eyeColor = eyeColor;
   	}
 	
 	function random(list) {
@@ -32,8 +32,6 @@ $(document).ready(function(){
 		
 	function saveMsg() {		
 		var arr = createArr(10);
-	//	console.log("arr is: " + JSON.stringify(arr));
-
 		var promise = Parse.Cloud.run('saveList', {list:arr}, {
 			success: function(msg) {
 				console.log("save msg sucess: " + msg);
@@ -43,41 +41,29 @@ $(document).ready(function(){
 			}
 		});
 		return promise;
-	}	
-	
-	
+	}
 	
 	function displayCounts() {
 		console.log("Getting Counts");
 		$.each(fields, function(idx){
 			var fieldStr = fields[idx];
 			var fieldList = eval(fieldStr);
-
 			$.each(fieldList, function(index){
-			console.log("fieldName: " + fieldStr + ". fields: " + fieldList);
-			console.log("field at index: " + index + ": " + fieldList[index]);
-			Parse.Cloud.run('count', {fieldName:fieldStr, fieldVal:fieldList[index]}, {
-			 				success: function(count) {
-			 					$content.append("<p>" + fieldList[index] + " counts:" + count + "</p>");
-			 				},
-			 				error: function(error) {
-			 					console.log("displayAll error " + error);
-			 				}
-			 				});
-
+				Parse.Cloud.run('count', {fieldName:fieldStr, fieldVal:fieldList[index]}, {
+					success: function(count) {
+						$content.append("<p>" + fieldList[index] + " counts:" + count + "</p>");
+					},
+					error: function(error) {
+						console.log("displayAll error " + error);
+					}
+				});
 			});
-		});
-				
+		});		
 	}	
 	
 	function displayMsg() {
-		console.log("Reading and displaying messages");
-		
 		Parse.Cloud.run('read', {}, {
 			success: function(msg) {
-				//console.log("# messages:" + msg.length);
-				//console.log("msg:" + JSON.stringify(msg));
-				
 				$.each(msg, function(index){
 		    		$messages.append("<p>" + msg[index].get("idx")  + ": "+ msg[index].get("firstName") + " " + msg[index].get("lastName") + ",Eye Color: " + msg[index].get("eyeColor") + ".</p>"); 
 			});			
@@ -85,10 +71,8 @@ $(document).ready(function(){
 			error: function(error) {
 				console.log("displayAll error " + error);
 			}
-		});
-		
+		});	
 	}
-	
 
 	// Initialize Parse with your Parse application javascript keys
 	Parse.initialize("idhQyKbKtbEjLeVwbBXiblxig5aPrLcxjVq5Z4mV",

@@ -1,13 +1,9 @@
 Parse.Cloud.define("count", function(request, response) {
   	var Message = Parse.Object.extend("Message");
 	var query = new Parse.Query(Message);
-	console.log("val " +request.params.fieldVal);
-	console.log("name " +request.params.fieldName);
-	
 	query.equalTo(request.params.fieldName,request.params.fieldVal);
 	query.count({
 	  success: function(count) {
-  		console.log("count of " +request.params.fieldVal + " for " + request.params.fieldName + " is: " + JSON.stringify(count));
 	 	response.success(count);
 	  },
 	  error: function(error) {
@@ -39,8 +35,6 @@ Parse.Cloud.define("saveList", function(request, response) {
         var Message = Parse.Object.extend("Message");
         var message = new Message();		
         var content = request.params.list[i];
-
-		console.log("content is: " + JSON.stringify(content));
 		message.set("firstName",content.firstName);   
 		message.set("lastName",content.lastName);   
 		message.set("eyeColor",content.eyeColor);   
